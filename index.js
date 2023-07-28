@@ -42,17 +42,19 @@ function writeToFile(fileName, data) {
     inquirer.prompt(questions)
     .then((answers) => {
         if(answers.shape = 'Cirlce'){
-           const logo = new Circle;
-           
+           const logo = new Circle();
+           writeToFile('logo.svg', logo.render())
         }
         else if(answers.shape = 'Triangle') {
-            const logo = new Triangle;
+            const logo = new Triangle();
+            const logoSVG = logo.render()
+            writeToFile('logo.svg', logoSVG)
         }
         else{
-            const logo = new Square;
+            const logo = new Square();
+            const logoSVG = logo.render()
+            writeToFile('logo.svg', logoSVG)
         }
-        const logoSVG = logo.render(answers)
-        writeToFile('logo.svg', logoSVG)
     })
     };
 
