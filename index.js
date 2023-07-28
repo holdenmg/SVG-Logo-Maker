@@ -39,8 +39,6 @@ function writeToFile(fileName, data) {
   function init() {
     inquirer.prompt(questions)
     .then((answers) => {
-      console.log(answers);
-      console.log(answers.shape);
         if(answers.shape === 'Circle'){
            const logo = new Circle(answers.text, answers.fontColor, answers.shapeColor);
            console.log(logo);
