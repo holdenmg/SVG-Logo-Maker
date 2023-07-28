@@ -1,8 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Shape = require('./shapes.js');
-const Circle = require( './shapes.js');
-const Square = require('./shapes.js');
+const Shape = require('./lib/shapes.js');
+const Circle = require( './lib/shapes.js');
+const Square = require('./lib/shapes.js');
+const Triangle = require('./lib/shapes.js');
 
 
 const questions = [ {
@@ -20,7 +21,7 @@ const questions = [ {
     type: 'list',
     message: 'Choose shape',
     name: 'shape',
-    choices: ['circle','square','triangle']
+    choices: ['Circle','Square','Triangle']
   },
   {
     type: 'input',
@@ -33,13 +34,26 @@ const questions = [ {
 //Function to write svg content
 function writeToFile(fileName, data) {
   const svgContent = createSvg(data);
-  fs.writeFile(fileName, svgContent, (err) =>
-  err ? console.log(err) : console.log("success")
+  fs.writeFile(fileName, logoSVG, (err) =>
+  err ? console.log(err) : console.log("Generated logo.svg")
   )};
 
   function init() {
     inquirer.prompt(questions)
     .then((answers) => {
-    writeToFile('logo.svg', answers)
-    });
-}
+        if(answers.shape = 'Cirlce'){
+           const logo = new Circle;
+           
+        }
+        else if(answers.shape = 'Triangle') {
+            const logo = new Triangle;
+        }
+        else{
+            const logo = new Square;
+        }
+        const logoSVG = logo.render(answers)
+        writeToFile('logo.svg', logoSVG)
+    })
+    };
+
+    init();
