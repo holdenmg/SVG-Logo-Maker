@@ -5,7 +5,7 @@ const Square = require('./lib/square.js');
 const Triangle = require('./lib/triangle.js');
 
 
-
+//prompts to generate svg
 const questions = [ {
     type: 'input',
     message: 'Enter text for logo (Must not be more than 3 characters)',
@@ -35,7 +35,7 @@ function writeToFile(fileName, data) {
   err ? console.log(err) : console.log("Generated logo.svg")
   )};
 
-
+//creates svg by calling the selected shapes render function after passing in parameters frm answers
   function init() {
     inquirer.prompt(questions)
     .then((answers) => {
