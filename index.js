@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Shape = require('./lib/shapes.js');
-const Circle = require( './lib/shapes.js');
-const Square = require('./lib/shapes.js');
-const Triangle = require('./lib/shapes.js');
+const Circle = require( './lib/circle.js');
+const Square = require('./lib/square.js');
+const Triangle = require('./lib/triangle.js');
+
 
 
 const questions = [ {
@@ -14,7 +14,7 @@ const questions = [ {
   {
     type: 'input',
     message: 'Enter a text color:',
-    name: 'text-color',
+    name: 'fontColor',
   },
 
   {
@@ -26,32 +26,34 @@ const questions = [ {
   {
     type: 'input',
     message: 'Enter shape color',
-    name: 'shape-color',
+    name: 'shapeColor',
   },
 
 ];
-
-//Function to write svg content
 function writeToFile(fileName, data) {
-  const svgContent = createSvg(data);
-  fs.writeFile(fileName, logoSVG, (err) =>
+  fs.writeFile(fileName, data, (err) =>
   err ? console.log(err) : console.log("Generated logo.svg")
   )};
+
 
   function init() {
     inquirer.prompt(questions)
     .then((answers) => {
-        if(answers.shape = 'Cirlce'){
-           const logo = new Circle();
-           writeToFile('logo.svg', logo.render())
+      console.log(answers);
+      console.log(answers.shape);
+        if(answers.shape === 'Circle'){
+           const logo = new Circle(answers.text, answers.fontColor, answers.shapeColor);
+           console.log(logo);
+           const logoSVG = logo.render();
+           writeToFile('logo.svg',logoSVG);
         }
-        else if(answers.shape = 'Triangle') {
-            const logo = new Triangle();
+        else if(answers.shape === 'Triangle') {
+            const logo = new Triangle(answers.text, answers.fontColor, answers.shapeColor);
             const logoSVG = logo.render()
             writeToFile('logo.svg', logoSVG)
         }
         else{
-            const logo = new Square();
+            const logo = new Square(answers.text, answers.fontColor, answers.shapeColor);
             const logoSVG = logo.render()
             writeToFile('logo.svg', logoSVG)
         }
